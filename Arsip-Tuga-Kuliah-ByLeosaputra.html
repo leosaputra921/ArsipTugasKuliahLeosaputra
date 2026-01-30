@@ -1,0 +1,479 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+<meta charset="UTF-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+<title>Arsip Tugas Kuliah - Mega Mendung Biru</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;600;700&display=swap" rel="stylesheet">
+
+<style>
+/* =============================
+   RESET & BASE STYLE
+============================= */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+  font-family: "Poppins", sans-serif;
+}
+
+body {
+  color: #0b1f33;
+  overflow-x: hidden;
+  min-height: 100vh;
+  background: linear-gradient(135deg, #0b3c6f, #1e5aa8, #4da3ff);
+}
+
+:root {
+  --biru-tua: #0b3c6f;
+  --biru: #1e5aa8;
+  --biru-muda: #4da3ff;
+  --putih: #ffffff;
+  --abu: #f0f4fa;
+}
+
+/* =============================
+   MEGA MENDUNG BACKGROUND (SVG)
+============================= */
+body::before {
+  content: "";
+  position: fixed;
+  inset: 0;
+  background-image: url("data:image/svg+xml;utf8,<svg xmlns='http://www.w3.org/2000/svg' width='600' height='300' viewBox='0 0 600 300'><path d='M0 150 Q100 80 200 150 T400 150 T600 150 V300 H0 Z' fill='%23ffffff22'/><path d='M0 180 Q120 110 240 180 T480 180 T600 180 V300 H0 Z' fill='%23ffffff18'/><path d='M0 210 Q140 140 280 210 T560 210 T600 210 V300 H0 Z' fill='%23ffffff12'/></svg>");
+  background-size: 600px 300px;
+  background-repeat: repeat;
+  opacity: 0.6;
+  z-index: -1;
+}
+
+/* =============================
+   NAVBAR
+============================= */
+header {
+  position: sticky;
+  top: 0;
+  background: linear-gradient(135deg, var(--biru-tua), var(--biru));
+  color: white;
+  padding: 12px 40px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  z-index: 10;
+  box-shadow: 0 10px 30px rgba(0,0,0,0.25);
+}
+
+header h1 {
+  font-size: 20px;
+  letter-spacing: 1px;
+}
+
+nav ul {
+  list-style: none;
+  display: flex;
+  gap: 20px;
+}
+
+nav a {
+  color: white;
+  text-decoration: none;
+  font-size: 14px;
+  position: relative;
+}
+
+nav a::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: -5px;
+  width: 0;
+  height: 2px;
+  background: var(--biru-muda);
+  transition: 0.3s;
+}
+
+nav a:hover::after {
+  width: 100%;
+}
+
+/* =============================
+   HERO SECTION
+============================= */
+.hero {
+  min-height: 90vh;
+  display: grid;
+  place-items: center;
+  text-align: center;
+  padding: 40px;
+}
+
+.hero-box {
+  background: rgba(255,255,255,0.85);
+  backdrop-filter: blur(8px);
+  border-radius: 24px;
+  padding: 50px;
+  max-width: 800px;
+  box-shadow: 0 20px 50px rgba(0,0,0,0.3);
+  animation: fadeUp 1s ease;
+}
+
+.hero h2 {
+  font-size: 36px;
+  color: var(--biru);
+}
+
+.hero p {
+  margin-top: 12px;
+  color: #444;
+}
+
+.hero button {
+  margin-top: 25px;
+  padding: 12px 30px;
+  border: none;
+  border-radius: 30px;
+  background: linear-gradient(135deg, var(--biru), var(--biru-muda));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.hero button:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.25);
+}
+
+@keyframes fadeUp {
+  from {opacity:0; transform: translateY(40px);} 
+  to {opacity:1; transform: translateY(0);} 
+}
+
+/* =============================
+   SECTION STYLE
+============================= */
+section {
+  padding: 80px 60px;
+}
+
+.section-title {
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.section-title h3 {
+  font-size: 28px;
+  color: var(--putih);
+}
+
+/* =============================
+   SEMESTER GRID
+============================= */
+.semester-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.semester-card {
+  background: rgba(255,255,255,0.9);
+  border-radius: 20px;
+  padding: 25px;
+  box-shadow: 0 15px 35px rgba(0,0,0,0.2);
+  transition: 0.3s;
+  position: relative;
+  overflow: hidden;
+}
+
+.semester-card:hover {
+  transform: translateY(-8px) scale(1.02);
+}
+
+.semester-card h4 {
+  color: var(--biru);
+  margin-bottom: 10px;
+}
+
+.semester-card button {
+  margin-top: 15px;
+  padding: 8px 18px;
+  border-radius: 20px;
+  border: none;
+  background: var(--biru);
+  color: white;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+/* =============================
+   TASK MANAGER
+============================= */
+.task-box {
+  max-width: 1000px;
+  margin: auto;
+  background: rgba(255,255,255,0.92);
+  border-radius: 22px;
+  padding: 30px;
+  box-shadow: 0 20px 40px rgba(0,0,0,0.25);
+}
+
+.task-form {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.task-form input, .task-form select {
+  padding: 10px 14px;
+  border-radius: 12px;
+  border: 1px solid #ddd;
+}
+
+.task-form button {
+  border: none;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--biru), var(--biru-muda));
+  color: white;
+  font-weight: 600;
+  cursor: pointer;
+}
+
+.task-list {
+  margin-top: 15px;
+  display: grid;
+  gap: 12px;
+}
+
+.task-item {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 14px 16px;
+  border-radius: 14px;
+  background: var(--abu);
+  animation: fadeUp 0.5s ease;
+}
+
+.task-item span {
+  font-size: 14px;
+}
+
+.task-item .actions {
+  display: flex;
+  gap: 8px;
+}
+
+.task-item button {
+  border: none;
+  border-radius: 10px;
+  padding: 6px 12px;
+  cursor: pointer;
+  font-size: 12px;
+}
+
+.btn-delete {background: #c0392b; color:white;}
+.btn-view {background: var(--biru-muda); color:white;}
+.btn-download {background: var(--biru); color:white;}
+
+/* =============================
+   FOOTER
+============================= */
+footer {
+  background: linear-gradient(135deg, var(--biru-tua), var(--biru));
+  color: white;
+  text-align: center;
+  padding: 20px;
+  margin-top: 60px;
+}
+</style>
+</head>
+<body>
+
+<header>
+  <h1>📚 Arsip Tugas Kuliah</h1>
+  <nav>
+    <ul>
+      <li><a href="#home">Home</a></li>
+      <li><a href="#semester">Semester</a></li>
+      <li><a href="#tugas">Manajemen Tugas</a></li>
+      <li><a href="#about">Tentang</a></li>
+    </ul>
+  </nav>
+</header>
+
+<section id="home" class="hero">
+  <div class="hero-box">
+    <h2>Website Penyimpanan Tugas Kuliah</h2>
+    <p>Simpan semua tugas kuliah dari Semester 1 sampai Semester 8 dengan rapi, cepat, dan bernuansa Mega Mendung 🇮🇩</p>
+    <button onclick="scrollToSection('semester')">Mulai Sekarang</button>
+  </div>
+</section>
+
+<section id="semester">
+  <div class="section-title">
+    <h3>Daftar Semester</h3>
+  </div>
+  <div class="semester-grid" id="semesterGrid"></div>
+</section>
+
+<section id="tugas">
+  <div class="section-title">
+    <h3>Manajemen Tugas & Upload File</h3>
+  </div>
+  <div class="task-box">
+    <div class="task-form">
+      <input type="text" id="taskName" placeholder="Nama Tugas" />
+      <input type="text" id="courseName" placeholder="Mata Kuliah" />
+      <select id="semesterSelect"></select>
+      <input type="file" id="taskFile" accept=".pdf,.doc,.docx,.ppt,.pptx,.jpg,.jpeg,.png,.zip,.rar" />
+      <button onclick="addTask()">Tambah Tugas</button>
+    </div>
+    <div class="task-list" id="taskList"></div>
+  </div>
+</section>
+
+<section id="about">
+  <div class="section-title">
+    <h3>Tentang Website</h3>
+  </div>
+  <p style="max-width:800px;margin:auto;text-align:center;line-height:1.8;color:white;">Website ini dibuat untuk menyimpan tugas, mengelola, dan mengarsipkan tugas kuliah selama 8 semester.</p>
+</section>
+
+<footer>
+  <p>© 2026 - Arsip Tugas Kuliah | Tema Mega Mendung Biru</p>
+</footer>
+
+<script>
+/* =============================
+   DATA & INITIALIZATION
+============================= */
+const semesters = Array.from({length: 8}, (_, i) => `Semester ${i+1}`);
+let tasks = JSON.parse(localStorage.getItem("tasks")) || [];
+
+function initSemester() {
+  const grid = document.getElementById("semesterGrid");
+  const select = document.getElementById("semesterSelect");
+  grid.innerHTML = "";
+  select.innerHTML = "";
+
+  semesters.forEach((s) => {
+    const card = document.createElement("div");
+    card.className = "semester-card";
+    card.innerHTML = `<h4>${s}</h4><p>Kumpulan tugas untuk ${s}</p><button onclick=\"filterSemester('${s}')\">Lihat Tugas</button>`;
+    grid.appendChild(card);
+
+    const opt = document.createElement("option");
+    opt.value = s;
+    opt.textContent = s;
+    select.appendChild(opt);
+  });
+}
+
+/* =============================
+   FILE TO BASE64 (SIMPLE STORAGE)
+============================= */
+function fileToBase64(file) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = reject;
+    reader.readAsDataURL(file);
+  });
+}
+
+/* =============================
+   TASK FUNCTIONS
+============================= */
+async function addTask() {
+  const name = document.getElementById("taskName").value.trim();
+  const course = document.getElementById("courseName").value.trim();
+  const semester = document.getElementById("semesterSelect").value;
+  const fileInput = document.getElementById("taskFile");
+
+  if (!name || !course) {
+    alert("Isi nama tugas dan mata kuliah!");
+    return;
+  }
+
+  let fileData = null;
+  let fileName = "";
+
+  if (fileInput.files.length > 0) {
+    const file = fileInput.files[0];
+    fileName = file.name;
+    fileData = await fileToBase64(file);
+  }
+
+  const task = { id: Date.now(), name, course, semester, fileName, fileData };
+  tasks.push(task);
+  saveTasks();
+  renderTasks();
+
+  document.getElementById("taskName").value = "";
+  document.getElementById("courseName").value = "";
+  fileInput.value = "";
+}
+
+function renderTasks(filter = null) {
+  const list = document.getElementById("taskList");
+  list.innerHTML = "";
+
+  const filtered = filter ? tasks.filter(t => t.semester === filter) : tasks;
+
+  filtered.forEach(task => {
+    const item = document.createElement("div");
+    item.className = "task-item";
+
+    let fileInfo = task.fileName ? `<small>📎 File: ${task.fileName}</small>` : `<small>📎 Tidak ada file</small>`;
+
+    item.innerHTML = `<span><b>${task.name}</b> - ${task.course} (${task.semester})</span>
+      ${fileInfo}
+      <div class="actions">
+        ${task.fileData ? `<button class="btn-download" onclick=\"downloadFile('${task.id}')\">Download</button>` : ""}
+        <button class="btn-view" onclick=\"alert('Detail: ${task.name} - ${task.course}')\">Detail</button>
+        <button class="btn-delete" onclick=\"deleteTask(${task.id})\">Hapus</button>
+      </div>`;
+    list.appendChild(item);
+  });
+}
+
+function downloadFile(id) {
+  const task = tasks.find(t => t.id == id);
+  if (!task || !task.fileData) return;
+
+  const a = document.createElement("a");
+  a.href = task.fileData;
+  a.download = task.fileName || "file";
+  a.click();
+}
+
+function deleteTask(id) {
+  tasks = tasks.filter(t => t.id !== id);
+  saveTasks();
+  renderTasks();
+}
+
+function filterSemester(semester) {
+  renderTasks(semester);
+  scrollToSection('tugas');
+}
+
+function saveTasks() {
+  localStorage.setItem("tasks", JSON.stringify(tasks));
+}
+
+/* =============================
+   UI FUNCTIONS
+============================= */
+function scrollToSection(id) {
+  document.getElementById(id).scrollIntoView({ behavior: "smooth" });
+}
+
+window.addEventListener("load", () => {
+  initSemester();
+  renderTasks();
+});
+</script>
+
+</body>
+</html>
